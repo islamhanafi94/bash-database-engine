@@ -1,5 +1,5 @@
 #!/bin/bash
-
+. ./createDB.sh
 
 # main menu 
 RunDBMS () {
@@ -16,7 +16,7 @@ RunDBMS () {
   read ch
   case $ch in
     1)  listDB ;; #show all function
-    2)  createDB ;;
+    2)  . ./CreateDB.sh ;;
     3)  echo 1 ;;
     4)  deleteDB ;;
     5)  echo 2 ;;
@@ -58,16 +58,33 @@ backToMainMenu(){
 	esac			
 done
 }
-createDB (){
-    clear;
-    echo ">>>>> Create new Database <<<<<"
-    echo -n "Enter Database name : "
-    read DBname
-    # we should check if the name is already taken
-    mkdir ./DBs/$DBname;
-    backToMainMenu;
+# createDB (){
+# #     # clear;
+# #     # echo ">>>>> Create new Database <<<<<"
+# #     # echo -n "Enter Database name : "
+# #     # read DBname
+# #     # # we should check if the name is already taken
+# #     # mkdir ./DBs/$DBname;
+# #     # backToMainMenu;
+
+# echo "Please enter the Database name to create :";
+#    read dbName ;
+#    if [ [-d "usr/DataBases/$dbName" ] ]
+#       then
+#       clear 
+#        echo "Databas already exist "
+      
+
+           
+#    else 
+#        sudo mkdir /usr/DataBases/$dbName 
+#         #  clear ;
+#          echo "Data Base Created Successfuly!" 
+#          cd /usr/DataBases/$dbName
+#    fi 
+
     
-}
+# }
 
 deleteDB() {
     clear;
