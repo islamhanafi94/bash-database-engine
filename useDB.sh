@@ -1,4 +1,5 @@
 #!/bin/bash
+
 useDB(){
     echo "Plz enter the Database Name";
     read dbName
@@ -6,9 +7,13 @@ useDB(){
     then
         if [[ -d "./DBs/$dbName" ]]
         then
-            # export dbName
+            
             cd ./DBs/$dbName
             echo  "you connected to $dbName "
+            
+            cd ../.. 
+            pwd
+             . ./crud.sh
             
         else
             echo "There's no database with name $dbName"
