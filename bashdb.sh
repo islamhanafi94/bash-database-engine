@@ -1,5 +1,5 @@
 #!/bin/bash
-. ./createDB.sh
+
 
 # main menu 
 RunDBMS () {
@@ -17,7 +17,7 @@ RunDBMS () {
   case $ch in
     1)  listDB ;; #show all function
     2)  . ./CreateDB.sh ;;
-    3)  echo 1 ;;
+    3)  . ./useDB.sh;;
     4)  deleteDB ;;
     5)  echo 2 ;;
     6)  exit;;
