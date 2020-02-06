@@ -15,16 +15,18 @@ function crud (){
   read ch
   case $ch in
     1)  clear ;
-        ls -A ./DBs/$dbName;
-        ;; # ;; # new function
+        . ../.././showAllTabels.sh;
+        ;;
     2)  . ../.././createTable.sh;;
     3)  3;;
     4)  4;;
     5)  5;;
-    6)  6;;
-    7)  7;;
-    8) clear; cd ./bashdb.sh; mainMenu ;;
-    9) exit ;;
+    6)  . ../.././dropTable.sh;;
+    7) clear;
+       cd ../..;
+       . ./bashdb.sh 
+       ;;
+    8) exit ;;
     *) echo " Wrong Choice " ; crud;
   esac
 
