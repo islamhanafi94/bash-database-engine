@@ -3,20 +3,22 @@
 
 # main menu 
 RunDBMS () {
-
-  echo  "****** BashDBMS ******"
-  echo "1) Show all Databases"
-  echo "2) Create new Database"
-  echo "3) Connect to Database"
-  echo "4) Delete Database"
-  echo "5) Help"
-  echo "6) Exit"
-  echo  "*******************"
-  echo -n "Your Command : "
+    echo  "****** BashDBMS ******"
+    echo "1) Show all Databases"
+    echo "2) Create new Database"
+    echo "3) Connect to Database"
+    echo "4) Delete Database"
+    echo "5) Help"
+    echo "6) Exit"
+    echo  "**********************"
+    echo -n "What Do you want to do ? : ";
+    # echo "----------------------------"
   read ch
   case $ch in
     1)  listDB ;; #show all function
-    2)  . ./CreateDB.sh ;;
+    2)  clear;
+        . ./CreateDB.sh 
+        ;;
     3)  . ./useDB.sh;;
     4)  deleteDB ;;
     5)  echo 2 ;;
@@ -58,33 +60,6 @@ backToMainMenu(){
 	esac			
 done
 }
-# createDB (){
-# #     # clear;
-# #     # echo ">>>>> Create new Database <<<<<"
-# #     # echo -n "Enter Database name : "
-# #     # read DBname
-# #     # # we should check if the name is already taken
-# #     # mkdir ./DBs/$DBname;
-# #     # backToMainMenu;
-
-# echo "Please enter the Database name to create :";
-#    read dbName ;
-#    if [ [-d "usr/DataBases/$dbName" ] ]
-#       then
-#       clear 
-#        echo "Databas already exist "
-      
-
-           
-#    else 
-#        sudo mkdir /usr/DataBases/$dbName 
-#         #  clear ;
-#          echo "Data Base Created Successfuly!" 
-#          cd /usr/DataBases/$dbName
-#    fi 
-
-    
-# }
 
 deleteDB() {
     clear;

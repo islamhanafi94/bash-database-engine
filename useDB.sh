@@ -1,22 +1,28 @@
 #!/bin/bash
 
 useDB(){
-    echo "Plz enter the Database Name";
+    clear
+    echo  "****** Connect to DataBase ******"
+   echo  "---------------------------------"
+    echo -n "Please Enter Database Name: ";
     read dbName
+    echo "------------------------"
     if [[ -n ./DBs/$dbName ]] #not an empty String   
     then
         if [[ -d "./DBs/$dbName" ]]
         then
-            
+            clear
             cd ./DBs/$dbName
-            echo  "you connected to $dbName "
-            
-            cd ../.. 
-            pwd
-             . ./crud.sh
+            echo  "you are connected to $dbName "
+            echo  "-------------------------"
+            # cd ../.. 
+            # pwd
+             . ../.././crud.sh
             
         else
+            clear;
             echo "There's no database with name $dbName"
+            . ./backtoMain.sh
             
         fi
     else
