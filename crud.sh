@@ -14,11 +14,9 @@ function crud (){
   echo -n "What Do you want to do ? : ";
   read ch
   case $ch in
-    1)  clear ;
-        . ../.././showAllTabels.sh;
-        ;;
+    1)  . ../.././showAllTabels.sh;;
     2)  . ../.././createTable.sh;;
-    3)  3;;
+    3)  . ../.././insertInTable.sh;;
     4)  4;;
     5)  5;;
     6)  . ../.././dropTable.sh;;
