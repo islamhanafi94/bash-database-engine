@@ -10,13 +10,13 @@ read tableName
 fi
 
 colsNum= `awk 'END{print NR}' ./$tableName`
-  sep="@"
+sep=":"
 rSep="\n"
 colsNum=2
 
 for (( i = 2; i <= $colsNum; i++ )); do
-    colName=$(awk 'BEGIN{FS="@"}{ if(NR=='$i') print $1}' ./$tableName)
-    colType=$( awk 'BEGIN{FS="@"}{if(NR=='$i') print $2}' ./$tableName)
+    colName=$(awk 'BEGIN{FS=":"}{ if(NR=='$i') print $1}' ./$tableName)
+    colType=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $2}' ./$tableName)
 #colKey=$( awk 'BEGIN{FS="@"}{if(NR=='$i') print $3}' ./$tableName)
     echo -e "$colName ($colType) = \c"
 read data

@@ -65,11 +65,11 @@ insertInTable()
     
     #echo $colsNum
     
-      sep="@"
+      sep=":"
       rSep="\n"
     for (( i = 2; i <= $colsNum; i++ )); do
-    colName=$(awk 'BEGIN{FS="@"}{ if(NR=='$i') print $1}' ./.${tableName}MetaData)
-    colType=$( awk 'BEGIN{FS="@"}{if(NR=='$i') print $2}' ./.${tableName}MetaData)
+    colName=$(awk 'BEGIN{FS=":"}{ if(NR=='$i') print $1}' ./.${tableName}MetaData)
+    colType=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $2}' ./.${tableName}MetaData)
     echo -e "$colName ($colType) ---->"
     read data
 
@@ -84,7 +84,7 @@ insertInTable()
 
     #if [[ $colKey == "PK" ]]; then
       while [[ true ]]; do
-        if [[ $data =~ ^[`awk 'BEGIN{FS="@" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $tableName`]$ ]]; then
+        if [[ $data =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $tableName`]$ ]]; then
           echo -e "invalid input !!"
         else
           break;

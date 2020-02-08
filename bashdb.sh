@@ -66,12 +66,21 @@ deleteDB() {
     echo ">>>>>Databases list<<<<<"
     echo -n "Enter Database name : "
     read droppedDB
-    rm -r DBs/$droppedDB
-    if [ $? -eq 0 ]; 
-    then 
-        echo "${droppedDB} Database Removed Successfuly!"
+    if test -d "./DBs/$droppedDB"
+      then
+        rm -r DBs/$droppedDB
+        if [ $? -eq 0 ]; 
+        then 
+            echo "${droppedDB} Database Removed Successfuly!"
+            echo "---------------------"
+        else 
+            echo "Failed to delete ${droppedDB}" 
+            echo "---------------------"
+
+        fi
     else 
-        echo "Failed!" 
+        echo "Invalid database name" 
+
     fi
     backToMainMenu
 }

@@ -16,7 +16,6 @@ createDB(){
       echo "----------------------------"     
       echo "DataBase Created Successfuly!"
       backToMainMenu
-      # ask to connect or back to main menu
    fi 
 }
 
@@ -25,18 +24,12 @@ createDB(){
 backToMainMenu(){
     PS3="What Do you want to do ? : ";
     echo "------------------------"
-    select varName in "Back to menu" "Connect to ($dbName)" "Exit"
+    select varName in "Back to menu"  "Exit"
     do
 	case $varName in
 		"Back to menu")
 			clear;
             . ./bashdb.sh;
-            break;
-            ;;
-
-		"Connect to ($dbName)")
-            clear;
-            # connect to db
             break;
             ;;
 

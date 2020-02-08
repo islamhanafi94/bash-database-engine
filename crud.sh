@@ -17,8 +17,8 @@ function crud (){
     1)  . ../.././showAllTabels.sh;;
     2)  . ../.././createTable.sh;;
     3)  . ../.././insertInTable.sh;;
-    4)  4;;
-    5)  5;;
+    4)  . ../.././selectTable.sh;;
+    5)  . ../.././deleteFromTable.sh;;
     6)  . ../.././dropTable.sh;;
     7) clear;
        cd ../..;

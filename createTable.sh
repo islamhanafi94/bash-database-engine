@@ -58,9 +58,8 @@ tabelMetaData(){
   echo -n "Number of Columns: "
   read colNumber
   counter=1
-  sep="@"
+  sep=":"
   rSep="\n"
-  pKey=""
   metaData="column"$sep"dataType"
 
   while [ $counter -le $colNumber ]
@@ -86,20 +85,12 @@ tabelMetaData(){
 
    metaData+=$rSep$colName$sep$colType
 
-   if [[ $counter == $colNumber ]]; 
-      then
-         temp=$temp$colName
-   else
-         temp=$temp$colName$sep
-   fi
-
    ((counter++))
   done
 
    touch $tableName;
    touch .${tableName}MetaData
    echo -e $metaData >> .${tableName}MetaData
-   echo -e $temp >> $tableName
    echo $MetaData
    if [[ $? == 0 ]]
       then
