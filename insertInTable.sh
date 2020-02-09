@@ -11,8 +11,8 @@ insertFunc(){
 
    # //////////////////////////Validating table name ////////////////////////////////
     if ! [[ -f $tableName ]]; then
-    echo "Table $tableName isn't existed "
-    backToMainMenu
+          echo "Table $tableName isn't existed "
+          backToMainMenu
 
 
    elif [ "$tableName" = "" ]; 
@@ -71,34 +71,33 @@ insertInTable()
       sep=":"
       rSep="\n"
     for (( i = 2; i <= $colsNum; i++ )); do
-    colName=$(awk 'BEGIN{FS=":"}{ if(NR=='$i') print $1}' ./.${tableName}MetaData)
-    colType=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $2}' ./.${tableName}MetaData)
-    echo -e "$colName ($colType)"
+        colName=$(awk 'BEGIN{FS=":"}{ if(NR=='$i') print $1}' ./.${tableName}MetaData)
+        colType=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $2}' ./.${tableName}MetaData)
+        echo -e "$colName ($colType)"
     
     read data
 
-    # Validate Input
+    # /////////////////////////////////Validate Input/////////////////////////////////////////
     if [[ $colType == "int" ]]; then
       while ! [[ $data =~ ^[0-9]*$ ]]; do
-        echo -e "invalid DataType !!"
-        echo -e "$colName $colType "
-        read data
+          echo -e "invalid DataType !!"
+          echo -e "$colName $colType "
+          read data
       done
-    fi
+
+    elif [[ $colType == "string" ]]; then
+      while  [[ ! $data =~ ^[a-zA-Z]*$ ]] || [[ $data == "" ]]; do
+          echo -e "invalid DataType !!"
+          echo -e "$colName $colType "
+          read data
+      done
 
     
-      while [[ true ]]; do
-        if [[ $data =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $tableName`]$ ]]; then
-          echo -e "invalid input !!"
-        else
-          break;
-        fi
-        echo -e "$colName $colType "
-        read data
-      done
+     fi
+
     
 
-    //////////////////////Set row////////////////////////////////////
+   # //////////////////////Set row////////////////////////////////////
     if [[ $i == $colsNum ]]; then
       row=$row$data$rSep
     else
@@ -107,13 +106,13 @@ insertInTable()
   done
   echo -e $row"\c" >> $tableName
   if [[ $? == 0 ]]
-  then
-    echo "Data Inserted Successfully"
-    
-    . ../.././crud.sh
+      then
+        echo "Data Inserted Successfully"
+        
+        . ../.././crud.sh
   else
-    echo "Error Inserting Data into Table $tableName"
-    . ../.././crud.sh
+      echo "Error Inserting Data into Table $tableName"
+      . ../.././crud.sh
   fi
   row=""
 
