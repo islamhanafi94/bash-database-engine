@@ -1,4 +1,7 @@
 
+
+
+
 insertFunc(){
    clear
    echo  "******** Insert Into Table ********"
@@ -6,11 +9,11 @@ insertFunc(){
    echo -n "Tabel name : ";
    read tableName ;
 
-   # Validating table name 
-   if ![[ -f $tableName ]]; 
-      then
-         echo "Table $tableName not Found ";
-         backToMainMenu;
+   # //////////////////////////Validating table name ////////////////////////////////
+    if ! [[ -f $tableName ]]; then
+    echo "Table $tableName isn't existed "
+    backToMainMenu
+
 
    elif [ "$tableName" = "" ]; 
       then
@@ -70,31 +73,32 @@ insertInTable()
     for (( i = 2; i <= $colsNum; i++ )); do
     colName=$(awk 'BEGIN{FS=":"}{ if(NR=='$i') print $1}' ./.${tableName}MetaData)
     colType=$( awk 'BEGIN{FS=":"}{if(NR=='$i') print $2}' ./.${tableName}MetaData)
-    echo -e "$colName ($colType) ---->"
+    echo -e "$colName ($colType)"
+    
     read data
 
     # Validate Input
     if [[ $colType == "int" ]]; then
       while ! [[ $data =~ ^[0-9]*$ ]]; do
         echo -e "invalid DataType !!"
-        echo -e "$colName $colType = \c"
+        echo -e "$colName $colType "
         read data
       done
     fi
 
-    #if [[ $colKey == "PK" ]]; then
+    
       while [[ true ]]; do
         if [[ $data =~ ^[`awk 'BEGIN{FS=":" ; ORS=" "}{if(NR != 1)print $(('$i'-1))}' $tableName`]$ ]]; then
           echo -e "invalid input !!"
         else
           break;
         fi
-        echo -e "$colName $colType = \c"
+        echo -e "$colName $colType "
         read data
       done
-    #fi
+    
 
-    #Set row
+    //////////////////////Set row////////////////////////////////////
     if [[ $i == $colsNum ]]; then
       row=$row$data$rSep
     else
@@ -116,3 +120,4 @@ insertInTable()
 
 }
 insertFunc
+

@@ -5,19 +5,43 @@ createDB(){
    echo -n "Please enter the Database name to create : ";
    read dbName ;
    
-   if test -d "./DBs/$dbName"
+    if [[ $dbName = "" ]]; then
+     echo "Databas name can't be null! "
+     
+     createDB
+     read dbName
+     
+
+   elif test -d "./DBs/$dbName"
       then
       echo "------------------------"     
       echo "Databas already exists! "
+       createDB
+     read dbName
       . ./backtoMain.sh
                  
-   else 
+   
+   elif [[ $dbName =~ ^[a-zA-Z] ]]; then
       mkdir ./DBs/$dbName
       echo "----------------------------"     
       echo "DataBase Created Successfuly!"
       backToMainMenu
+     
+
+   elif [[ $dbName =~ [/.:\|\-] ]]; then
+     echo -e "DataBase cannot named with special character" 
+     createDB
+     read dbName
+
+   else
+        echo -e "plz enter valid DB name"
+        createDB
+        read dbName
+        
+   
    fi 
 }
+
 
 
 
